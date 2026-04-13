@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+http://maven.apache.org/xsd/maven-4.0.0.xsd"> 
+
+    <modelVersion>4.0.0</modelVersion> 
+
+    <!-- 🔁 CHANGE: your org/package -->
+    <groupId>com.app</groupId> 
+
+    <!-- 🔁 CHANGE: MUST match your project/app name -->
+    <artifactId>expense-tracker</artifactId> 
+
+    <!-- 🔁 CHANGE: Jenkins can auto-increment this -->
+    <version>1.0</version> 
+
+    <!-- ⚠️ Keep as jar for Docker/K8s -->
+    <packaging>jar</packaging> 
+
+    <!-- 🔁 CHANGE: display name -->
+    <name>epense-tracker</name> 
+
+    <properties> 
+        <!-- 🔁 CHANGE if using different Java version -->
+        <maven.compiler.source>21</maven.compiler.source> 
+        <maven.compiler.target>21</maven.compiler.target> 
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
+
+        <!-- 🔁 CHANGE if needed -->
+        <junit.version>5.10.1</junit.version> 
+    </properties> 
+
+    <dependencies> 
+
+        <!-- JUnit 5 (for your test file) -->
+        <dependency> 
+            <groupId>org.junit.jupiter</groupId> 
+            <artifactId>junit-jupiter</artifactId> 
+            <version>${junit.version}</version> 
+            <scope>test</scope> 
+        </dependency> 
+
+        <!-- 🔁 OPTIONAL: add more (Spring Boot, DB, etc.) -->
+
+    </dependencies> 
+
+    <build> 
+        <plugins> 
+
+            <!-- Compiler -->
+            <plugin> 
+                <groupId>org.apache.maven.plugins</groupId> 
+                <artifactId>maven-compiler-plugin</artifactId> 
+                <version>3.11.0</version> 
+            </plugin> 
+
+            <!-- Run tests -->
+            <plugin> 
+                <groupId>org.apache.maven.plugins</groupId> 
+                <artifactId>maven-surefire-plugin</artifactId> 
+                <version>3.2.5</version> 
+                <configuration> 
+                    <useModulePath>false</useModulePath> 
+                </configuration> 
+            </plugin> 
+
+            <!-- Build runnable JAR -->
+            <plugin> 
+                <groupId>org.apache.maven.plugins</groupId> 
+                <artifactId>maven-jar-plugin</artifactId> 
+                <version>3.4.1</version> 
+                <configuration> 
+                    <archive> 
+                        <manifest> 
+                            <!-- 🔁 CHANGE: FULL path if inside package -->
+                            <!-- e.g., com.app.AppService -->
+                            <mainClass>ExpenseTracker</mainClass> 
+                        </manifest> 
+                    </archive> 
+                </configuration> 
+            </plugin> 
+
+        </plugins> 
+    </build> 
+
+</project>
