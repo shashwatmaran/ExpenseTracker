@@ -1,44 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: expense-tracker   # 🔁 CHANGE: unique app name (e.g., onlinequiz-app)
+  name: expense-tracker
 
 spec:
-  replicas: 1   # 🔁 CHANGE: increase if you want scaling (e.g., 2 or 3)
-
+  replicas: 1
   selector:
     matchLabels:
-      app: app   # 🔁 CHANGE: must match labels below
-
+      app: app   
   template:
     metadata:
       labels:
-        app: app   # 🔁 CHANGE: same as selector
+        app: app 
 
     spec:
       containers:
-        - name: app-container   # 🔁 CHANGE: container name (optional)
+        - name: app-container
 
-          image: shashmaran/expense-tracker:latest   # 🔁 CHANGE: your Docker image
+          image: shashmaran/expense-tracker:latest  
           imagePullPolicy: Always
 
           ports:
-            - containerPort: 8080   # ⚠️ MUST match your Java app port
+            - containerPort: 8080  
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: expensetracker-service   # 🔁 CHANGE: unique service name
+  name: expensetracker-service  
 
 spec:
-  type: NodePort   # 🔁 CHANGE: use ClusterIP if internal-only
+  type: NodePort  
 
   selector:
-    app: app   # 🔁 MUST match Deployment label
+    app: app   
 
   ports:
-    - port: 8080        # 🔁 Service port (external access inside cluster)
-      targetPort: 8080  # ⚠️ MUST match containerPort
+    - port: 8080       
+      targetPort: 8080  
 
-      nodePort: 30082   # 🔁 CHANGE: unique (range 30000–32767)
+      nodePort: 30082  
